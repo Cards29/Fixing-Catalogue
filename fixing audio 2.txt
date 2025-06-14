@@ -1,0 +1,17 @@
+In hyprland, I needed to insatll blueman manager to see my bluetooth devices with a ui.
+Also installed xdg desktop portal for hyprland
+
+AAAAAnd, most importantly, my a2dp was disabled,
+yeah, it actually was disabled.
+
+context: headset == a2dp
+	handsfree == smth, vule gesi, not imp
+
+I found that in the profiles in pactl list cards 
+then ran this command:
+	pactl set-card-profile bluez_card.DC_D4_44_0D_A2_36 a2dp-sink
+"bluez_card.DC_D4_44_0D_A2_36" is also listed in pactls cards.
+
+it will basically do what it says, set the card profile to a2dp.
+
+And that's the better output device. that's al.

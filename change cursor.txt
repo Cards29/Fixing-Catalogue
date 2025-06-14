@@ -1,0 +1,19 @@
+if nwg-look doesn't work, and it probably won't work,
+
+
+// the thing below is temporary
+run this command in the terminal:
+hyprctl setcursor <cursor name> <size>
+
+example:
+hyprctl setcursor ArcStarry-cursors 24
+
+get the <cursor name> from ~/.icons
+just set <size> to 24, it doesn't even work for other values
+
+
+// to permanently change it (not so parmanent)
+just write the same command in autostart in hyprland.conf
+
+for example:
+exec-once = hyprctl setcursor ArcStarry-cusors 24

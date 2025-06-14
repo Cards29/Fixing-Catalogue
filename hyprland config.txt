@@ -1,0 +1,24 @@
+TODO:
+In moving around windows keybind, I can't use j (as I intend to use same arrow movement keybind as vim),
+cause right above it, you'll find that $mainMod+J is toggle windows setup, so need to fix that.
+
+I wanna add brightness and bluetooth in waybar.
+
+What I did:
+Copied everuthing from typecraft (https://www.youtube.com/@typecraft_dev)
+Mainly, used stow to symlink his dotfiles from is repo, the dotfiles folder is in ~/dotfiles/
+same case for waybar,
+
+BUT:
+my changes:
+
+date: 4/6/2025
+in ~/.config/waybar/config.jsonc,
+I addeed on-click commands for both "clock" item and "network" item
+for network, just using nmtui through terminal
+for clock, a minimal cli app called calcurse
+
+date: 4/6/2025 (at night)
+I added a snippet in hypridle that will suspend and lock the screen when the lid is off.
+
+Learned: we can change cursor/theme from nwg-look, just gotta have the extracted downloaded files in ~/.icons or ~/.themes

@@ -1,0 +1,9 @@
+I installed the JavaFX SDK, its inside ~/Desktop/GariAche
+
+BUT, in IntellijIdea, I installed a full JDK, it's called Bellsoft Liberica 21 (Full),
+the 21 version because its the LTS version.
+
+This JDK comes with all dependencies and other stuff needed for JavaFX,
+so I didnt even need to add my installed JavaFX SDK.
+
+I installed Liberica Full inside IntellijIdea, so nothing too complicated, that was it.

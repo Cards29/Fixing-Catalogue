@@ -1,0 +1,2 @@
+I was running a bash script from github that was about a config for hyprland,
+and it installed a loooooooot of things, rust was in them as well, I dont know what the hell happend, should've used virtual machine.

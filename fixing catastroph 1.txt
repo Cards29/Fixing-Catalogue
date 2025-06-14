@@ -1,0 +1,57 @@
+what happend:
+i created some free space in windows, and needed to move it so that free space was right after the root partition.
+I used an app called minitool partition wizard. It worked fine. though I did need to turn off "detect potentially dangerous applications from eset antivirus to download it.
+Then when rebooted, GRUB stopped working and went into grub rescue mode.
+This was the catastrophe.
+
+How did I solve it:
+First of all, always backup your data, at least some data that are important.
+I booted into a live arch iso using an usb. You do need to go to BIOS and make the USB into top priority for boot.
+U might be able to do it using any other linux distro, but i still used arch.
+these are the steps:
+
+1.Connect to the internet, bash commands are:
+  iwctl \\ to go into iwctl shell
+  device list \\see the device name
+  station <device_name> get-networks \\ find your wifi from list
+  station <device_name> connect <wifi_name> \\ this will want your password for wifi
+  exit
+
+  check it with the ping command:
+  ping -c 5 google.com
+
+2.run "lsblk -f" to see in which partitions your boot and root is located
+  my root was in nvme0n1p5 and boot was in nvme0n1p4, so here are the commands in serial:
+  sudo mount /dev/nvme0n1p5 /mnt
+  sudo mount /dev/nvme0n1p4 /mnt/boot
+  sudo mount --bind /dev /mnt/dev
+  sudo mount --bind /proc /mnt/proc
+  sudo mount --bind /sys /mnt/sys
+  sudo mount --bind /run /mnt/run
+  sudo chroot /mnt
+  grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
+  
+  if it gives an error saying: "efibottmgr failed to register the boot entry: no such file or deirectory"
+  run this:
+  mount -t efivarfs efivarfs /sys/firmware/efi/efivars
+
+  then install grub again, and that's how grub worked again.
+
+
+3.Then even though grub was working, gnome wasn't opening, reason was:
+  [ TIME ] Timed out waiting for device /dev/disk/by-uuid/E9E8-A24B.
+  [DEPEND] Dependency failed for /boot.
+
+  it wasn't actually gnome, grub couldn't find the /boot since the UUID changed, though not sure what UUID is.
+  To clearly see what is the actual UUID run
+  blkid /dev/nvme0n1p4
+  
+  or u can run "lsblk -f" again to s=find the UUID again. After that,
+  nano /etc/fstab
+  - UUID=E9E8-A24B /boot ...
+  + UUID=3503-FE40 /boot vfat rw,relatime,fmask=0022,dmask=0022,codepage=437,iocharset=iso8859-1,shortname=mixed,utf8,errors=remount-ro 0 2
+
+  basically just change the UUID to the coorect one, (- means before, + means after your change, kinda like github)
+
+
+AND THAT'S IT.

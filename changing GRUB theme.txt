@@ -1,0 +1,24 @@
+1. install a theme zip file from gnome look
+
+2. extract it
+
+3. we basically need the folder with theme.txt, it should be inside the
+extracted folder
+
+4. copy that folder to here:
+bash
+sudo mkdir -p /boot/grub/themes/vimix
+sudo cp -r ~/downloads/[theme-name] /boot/grub/themes/vimix/
+
+// replace [theme-name] with the folder name that has theme.txt
+
+5.then go to grub in etc update like below:
+bash
+sudo nano /etc/default/grub
+GRUB_THEME="/boot/grub/themes/[theme-name]/theme.txt"
+
+6.lastly, configure grub and reboot
+bash
+sudo grub-mkconfig -o /boot/grub/grub.cfg
+reboot
+
